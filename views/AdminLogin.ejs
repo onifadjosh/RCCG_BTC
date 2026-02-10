@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | Breakthrough Cathedral</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #046307;
+            --primary-glow: rgba(4, 99, 7, 0.4);
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.4);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: url('/images/registration-bg.png') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 0;
+        }
+
+        .login-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+
+        .card-header-church {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #034d05 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .church-logo {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 15px;
+            background: white;
+            border-radius: 50%;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .church-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .card-body {
+            padding: 40px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-control {
+            border-radius: 12px;
+            padding: 14px 18px;
+            border: 2px solid #edf2f7;
+            background: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px var(--primary-glow);
+            outline: none;
+        }
+
+        .btn-church {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #034d05 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 16px;
+            font-weight: 700;
+            width: 100%;
+            margin-top: 10px;
+            box-shadow: 0 10px 20px -5px var(--primary-glow);
+            transition: all 0.3s ease;
+        }
+
+        .btn-church:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px -5px var(--primary-glow);
+            color: white;
+        }
+
+        .alert-custom {
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="glass-card">
+            <div class="card-header-church">
+                <div class="church-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Rccg_logo.png/1280px-Rccg_logo.png" alt="RCCG">
+                </div>
+                <h4 class="fw-bold mb-0">Admin Access</h4>
+            </div>
+
+            <div class="card-body">
+                <% if (message) { %>
+                    <div class="alert alert-danger alert-custom" role="alert">
+                        <%= message %>
+                    </div>
+                <% } %>
+
+                <form action="/admin/login" method="POST">
+                    <div class="mb-4">
+                        <label for="email" class="form-label">Admin Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="admin@example.com" required>
+                    </div>
+
+                    <div class="mb-5">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-church">Sign In to Dashboard</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4 text-white-50">
+            <small>&copy; <%= new Date().getFullYear() %> RCCG BTC Admin Portal</small>
+        </div>
+    </div>
+
+</body>
+</html>

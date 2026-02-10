@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= subject %></title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f4;
+        }
+        .wrapper {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .hero {
+            position: relative;
+            background-color: #046307;
+            text-align: center;
+        }
+        .hero img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .header {
+            padding: 30px;
+            background-color: #046307;
+            color: white;
+            text-align: center;
+        }
+        .content {
+            padding: 40px 30px;
+        }
+        .footer {
+            background-color: #f9faf9;
+            padding: 30px;
+            text-align: center;
+            font-size: 13px;
+            color: #666666;
+            border-top: 1px solid #eeeeee;
+        }
+        .button {
+            display: inline-block;
+            padding: 14px 30px;
+            background-color: #046307;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-top: 25px;
+        }
+        h1 {
+            color: #046307;
+            font-size: 24px;
+            margin-top: 0;
+        }
+        p {
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        .logo-footer {
+            width: 50px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="hero">
+            <!-- Provided by cid or external URL -->
+            <img src="https://rccg.org/wp-content/uploads/2020/05/Rccg_logo.png" style="width: 80px; padding: 20px;" alt="RCCG Logo">
+        </div>
+        
+        <div class="content">
+            <h1><%= subject %></h1>
+            <p>Dear Member,</p>
+            <div style="font-size: 16px; color: #4a5568;">
+                <%- content %>
+            </div>
+            
+            <a href="https://rccg.org" class="button">Visit Our Website</a>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Breakthrough Cathedral (RCCG)</strong></p>
+            <p>Growing in Faith, Serving in Love</p>
+            <div style="margin-top: 15px;">
+                <a href="#" style="color: #046307; margin: 0 10px;">Facebook</a> | 
+                <a href="#" style="color: #046307; margin: 0 10px;">Twitter</a> | 
+                <a href="#" style="color: #046307; margin: 0 10px;">Instagram</a>
+            </div>
+            <p style="margin-top: 20px; font-size: 11px;">
+                You are receiving this because you subscribed to our newsletter.<br>
+                <a href="#" style="color: #999;">Unsubscribe</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

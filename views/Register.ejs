@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsletter Registration | Breakthrough Cathedral</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #046307;
+            --primary-glow: rgba(4, 99, 7, 0.4);
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.4);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: url('/images/registration-bg.png') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Overlay for better readability */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 100%);
+            z-index: 0;
+        }
+
+        .registration-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 550px;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header-church {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #034d05 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .church-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: white;
+            border-radius: 50%;
+            padding: 10px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .church-logo:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .church-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* Subtle decorative pattern in header */
+        .card-header-church::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.1;
+            background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+
+        .card-header-church h2 {
+            font-weight: 700;
+            margin-bottom: 12px;
+            font-size: 2rem;
+            letter-spacing: -1px;
+        }
+
+        .card-header-church p {
+            font-weight: 300;
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 0;
+        }
+
+        .card-body {
+            padding: 45px 50px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .input-group-custom {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-control {
+            border-radius: 12px;
+            padding: 14px 18px;
+            border: 2px solid #edf2f7;
+            background: rgba(255, 255, 255, 0.9);
+            color: #2d3748;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            background: white;
+            box-shadow: 0 0 0 4px var(--primary-glow);
+            outline: none;
+        }
+
+        .btn-church {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #034d05 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 16px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            width: 100%;
+            margin-top: 15px;
+            box-shadow: 0 10px 20px -5px var(--primary-glow);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-church:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 25px -5px var(--primary-glow);
+            color: white;
+        }
+
+        .btn-church:active {
+            transform: scale(0.98);
+        }
+
+        .alert-custom {
+            border-radius: 15px;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            font-weight: 500;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .footer-text {
+            text-align: center;
+            margin-top: 30px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 576px) {
+            .card-body {
+                padding: 40px 25px;
+            }
+            .card-header-church {
+                padding: 40px 20px;
+            }
+            .card-header-church h2 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="registration-container">
+        <div class="glass-card">
+            <div class="card-header-church">
+                <div class="church-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Rccg_logo.png/1280px-Rccg_logo.png?20200506204115" alt="RCCG Logo">
+                </div>
+                <h2>Join Our Family</h2>
+                <p>Stay connected with Breakthrough Cathedral</p>
+            </div>
+
+            <div class="card-body">
+                <% if (locals.message) { %>
+                    <div class="alert alert-<%= message.toLowerCase().includes('success') ? 'success' : 'danger' %> alert-custom" role="alert">
+                        <%= message %>
+                    </div>
+                <% } %>
+
+                <form action="/register" method="POST">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="John" required>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Doe" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="john.doe@example.com" required>
+                    </div>
+
+                    <div class="mb-5">
+                        <label for="phoneNumber" class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="+234..." required>
+                    </div>
+
+                    <button type="submit" class="btn btn-church">Subscribe to Newsletter</button>
+                </form>
+            </div>
+        </div>
+        
+        <p class="footer-text">
+            &copy; <%= new Date().getFullYear() %> Breakthrough Cathedral. <br>
+            <span style="font-size: 0.8rem; opacity: 0.7;">We respect your privacy. You can unsubscribe at any time.</span>
+        </p>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

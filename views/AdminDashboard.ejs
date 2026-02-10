@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Breakthrough Cathedral</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #046307;
+            --secondary-bg: #f8faf8;
+            --accent-color: #034d05;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--secondary-bg);
+            color: #2d3748;
+        }
+
+        .navbar-church {
+            background-color: var(--primary-color);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: white !important;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-section {
+            background: white;
+            padding: 40px 0;
+            border-bottom: 1px solid #edf2f7;
+            margin-bottom: 40px;
+        }
+
+        .stats-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid #edf2f7;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            height: 100%;
+        }
+
+        .table-card {
+            background: white;
+            border-radius: 20px;
+            border: 1px solid #edf2f7;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+            overflow: hidden;
+        }
+
+        .table thead th {
+            background-color: #f8fafc;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: #64748b;
+            padding: 16px 24px;
+            border-bottom: 1px solid #edf2f7;
+        }
+
+        .table tbody td {
+            padding: 16px 24px;
+            vertical-align: middle;
+            border-bottom: 1px solid #edf2f7;
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        .btn-primary-church {
+            background-color: var(--primary-color);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn-primary-church:hover {
+            background-color: var(--accent-color);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .form-check-input:checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .newsletter-panel {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid #edf2f7;
+            position: sticky;
+            top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-church">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Rccg_logo.png/120px-Rccg_logo.png" height="30" alt="RCCG">
+                Admin Dashboard
+            </a>
+            <div class="d-flex align-items-center">
+                <span class="text-white opacity-75 me-3 d-none d-md-inline">Welcome, Pastor</span>
+                <a href="/admin/logout" class="btn btn-outline-light btn-sm rounded-pill px-3 me-2">Logout</a>
+                <a href="/register" class="btn btn-light btn-sm rounded-pill px-3">View Site</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="header-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="fw-bold mb-1">Subscriber Management</h1>
+                    <p class="text-muted mb-0">View, manage, and engage with your church community.</p>
+                </div>
+                <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                    <div class="stats-card d-inline-block text-start">
+                        <small class="text-muted text-uppercase fw-bold ls-sm">Total Subscribers</small>
+                        <h3 class="mb-0 fw-bold"><%= users.length %></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mb-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="table-card">
+                    <div class="p-4 border-bottom d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0 fw-bold">Active Subscribers</h5>
+                        <div class="input-group input-group-sm w-auto">
+                            <span class="input-group-text bg-white border-end-0"><i class="bi bi-search"></i></span>
+                            <input type="text" class="form-control border-start-0 ps-0" placeholder="Search members...">
+                        </div>
+                    </div>
+                    <form id="newsletterForm" action="/admin/send" method="POST">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th width="40">
+                                            <input class="form-check-input" type="checkbox" id="selectAll">
+                                        </th>
+                                        <th>Name</th>
+                                        <th>Email Address</th>
+                                        <th>Joined Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% if (users.length > 0) { %>
+                                        <% users.forEach(user => { %>
+                                            <tr>
+                                                <td>
+                                                    <input class="form-check-input user-checkbox" type="checkbox" name="selectedUsers" value="<%= user.email %>">
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex align-items-center gap-3">
+                                                        <div class="user-avatar text-uppercase">
+                                                            <%= user.firstName[0] %><%= user.lastName[0] %>
+                                                        </div>
+                                                        <div>
+                                                            <div class="fw-semibold"><%= user.firstName %> <%= user.lastName %></div>
+                                                            <small class="text-muted"><%= user.phoneNumber %></small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td><%= user.email %></td>
+                                                <td><%= new Date(user.createdAt).toLocaleDateString() %></td>
+                                            </tr>
+                                        <% }) %>
+                                    <% } else { %>
+                                        <tr>
+                                            <td colspan="4" class="text-center py-5">
+                                                <i class="bi bi-people display-4 text-muted mb-3 d-block"></i>
+                                                <p class="text-muted">No subscribers found yet.</p>
+                                            </td>
+                                        </tr>
+                                    <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mt-4 mt-lg-0">
+                <div class="newsletter-panel">
+                    <h5 class="fw-bold mb-4">Compose Newsletter</h5>
+                    
+                    <% if (locals.status) { %>
+                        <div class="alert alert-<%= status.type === 'success' ? 'success' : 'danger' %> alert-dismissible fade show rounded-4" role="alert">
+                            <%= status.message %>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <% } %>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Newsletter Subject</label>
+                        <input type="text" name="subject" class="form-control form-control-lg bg-light border-0" placeholder="e.g. Weekly Faith Update" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Message Content</label>
+                        <textarea name="content" class="form-control bg-light border-0" rows="8" placeholder="Type your pastoral message here..." required></textarea>
+                        <small class="text-muted mt-2 d-block">HTML content is supported.</small>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary-church btn-lg py-3">
+                            <i class="bi bi-send-fill me-2"></i> Send to Selected Members
+                        </button>
+                    </div>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p class="small text-muted mb-0">Note: Sending to many users may take a few moments.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Select all logic
+        document.getElementById('selectAll').addEventListener('change', function() {
+            const checkboxes = document.querySelectorAll('.user-checkbox');
+            checkboxes.forEach(cb => cb.checked = this.checked);
+        });
+
+        // Basic validation before submit
+        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+            const checked = document.querySelectorAll('.user-checkbox:checked').length;
+            if (checked === 0) {
+                e.preventDefault();
+                alert('Please select at least one member to send the newsletter to.');
+            }
+        });
+    </script>
+</body>
+</html>
