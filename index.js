@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const dotenv = require("dotenv");
 const session = require("express-session");
+const cors = require("cors");
 
 // Initialize configuration IMMEDIATELY before any other imports
 dotenv.config();
@@ -10,8 +11,15 @@ dotenv.config();
 const { registerUser } = require("./controllers/mail.controller");
 const { getAdminDashboard, sendBulkNewsletter, getLoginPage, handleLogin, handleLogout } = require("./controllers/admin.controller");
 const { checkAdmin } = require("./middleware/auth.middleware");
+const apiRouter = require("./routers/api.router");
 
 const app = express();
+
+// Enable CORS
+app.use(cors({
+  origin: "http://localhost:5173", // React dev server
+  credentials: true
+}));
 const PORT = process.env.PORT || 4500;
 
 // View engine setup
@@ -40,6 +48,9 @@ mongoose
   .connect(MONGODB_URI)
   .then(() => console.log("Connected to MongoDB successfully"))
   .catch((err) => console.error("MongoDB connection error:", err));
+
+// API Routes
+app.use("/api", apiRouter);
 
 // Routes
 app.get("/register", (req, res) => {
