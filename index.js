@@ -12,6 +12,7 @@ const { registerUser } = require("./controllers/mail.controller");
 const { getAdminDashboard, sendBulkNewsletter, getLoginPage, handleLogin, handleLogout } = require("./controllers/admin.controller");
 const { checkAdmin } = require("./middleware/auth.middleware");
 const apiRouter = require("./routers/api.router");
+const connectDB = require("./database/connectDB");
 
 const app = express();
 
@@ -43,11 +44,11 @@ app.use(session({
 }));
 
 // Database connection
-const MONGODB_URI = process.env.MONGODB_URI;
-mongoose
-  .connect(MONGODB_URI)
-  .then(() => console.log("Connected to MongoDB successfully"))
-  .catch((err) => console.error("MongoDB connection error:", err));
+// const MONGODB_URI = process.env.MONGODB_URI;
+// mongoose
+//   .connect(MONGODB_URI)
+//   .then(() => console.log("Connected to MongoDB successfully"))
+//   .catch((err) => console.error("MongoDB connection error:", err));
 
 // API Routes
 app.use("/api", apiRouter);
@@ -76,3 +77,10 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+
+
+module.exports= async(req, res)=>{
+  await connectDB()
+  return app(req, res)
+}
